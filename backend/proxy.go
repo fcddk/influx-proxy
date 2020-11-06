@@ -220,6 +220,7 @@ func (ip *Proxy) Query(w http.ResponseWriter, req *http.Request) (body []byte, e
 
 func (ip *Proxy) Write(p []byte, db, precision string) (err error) {
 	buf := bytes.NewBuffer(p)
+	log.Printf("write context:%s", string(p))
 	var line []byte
 	for {
 		line, err = buf.ReadBytes('\n')
@@ -245,6 +246,7 @@ func (ip *Proxy) WriteRow(line []byte, db, precision string) {
 		log.Printf("scan key error: %s", err)
 		return
 	}
+	log.Printf("nanoline:%s, meas:%s", string(nanoLine), meas)
 	if !RapidCheck(nanoLine[len(meas):]) {
 		log.Printf("invalid format, drop data: %s %s %s", db, precision, string(line))
 		return

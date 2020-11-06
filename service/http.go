@@ -123,6 +123,7 @@ func (hs *HttpService) HandlerWrite(w http.ResponseWriter, req *http.Request) {
 		defer b.Close()
 		body = b
 	}
+	log.Printf("content-Encoding:%s", req.Header.Get("Content-Encoding"))
 	p, err := ioutil.ReadAll(body)
 	if err != nil {
 		hs.WriteError(w, req, 400, err.Error())
