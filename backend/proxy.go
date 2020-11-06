@@ -220,7 +220,6 @@ func (ip *Proxy) Query(w http.ResponseWriter, req *http.Request) (body []byte, e
 
 func (ip *Proxy) Write(p []byte, db, precision string) (err error) {
 	buf := bytes.NewBuffer(p)
-	log.Printf("write context:%s", string(p))
 	var line []byte
 	for {
 		line, err = buf.ReadBytes('\n')
